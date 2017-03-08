@@ -3,7 +3,7 @@
  */
 import React, {Component, PropTypes} from 'react';
 import ReactDOM from 'react-dom';
-import  {WopSign, WopUploadImgToOss} from 'wxjs';
+import  {WopSign, WopUploadImgToOss} from 'wxjs2';
 import Clipboard from 'clipboard'
 import {WxFlowLayoutImagePicker} from 'react-imagepicker';
 import Loading from './Loading';

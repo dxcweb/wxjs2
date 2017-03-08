@@ -3,7 +3,7 @@
  */
 import React, {Component, PropTypes} from 'react';
 import ReactDOM from 'react-dom';
-import  {WopSign} from 'wxjs';
+import  {WopSign} from 'wxjs2';
 class WopSignExamples extends Component {
     render() {
         return (

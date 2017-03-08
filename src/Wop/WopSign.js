@@ -37,7 +37,6 @@ export default class WopSign extends Component {
     }
 
     wxConfig(data) {
-        console.log('wxConfig');
         const me = this;
         wx.config(data);
         this.timeout = setTimeout(function () {

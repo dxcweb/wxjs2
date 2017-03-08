@@ -3,7 +3,7 @@
  */
 import React, {Component, PropTypes} from 'react';
 import ReactDOM from 'react-dom';
-import  {WxLogin} from 'wxjs';
+import  {WxLogin} from 'wxjs2';
 class WopLoginExamples extends Component {
     render() {
         return (

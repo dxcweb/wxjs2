@@ -11,6 +11,7 @@ import WxQyUploadImgToOss from './WxQy/WxQyUploadImgToOss'
 import WxLogin from './Wx/WxLogin'
 import WxSign from './Wx/WxSign'
 import WxUploadImgToOss from './Wx/WxUploadImgToOss'
+import url from './utils/url'
 export default  {
     Base64,
     WopLogin,
@@ -21,5 +22,6 @@ export default  {
     WxQyUploadImgToOss,
     WxLogin,
     WxSign,
-    WxUploadImgToOss
+    WxUploadImgToOss,
+    url
 }

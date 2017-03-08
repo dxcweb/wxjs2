@@ -37,7 +37,6 @@ export default class WxQySign extends Component {
     }
 
     wxConfig(data) {
-        console.log('wxConfig');
         const me = this;
         wx.config(data);
         this.timeout = setTimeout(function () {
@@ -47,7 +46,7 @@ export default class WxQySign extends Component {
 
     jsonp() {
         const {url}=this.props;
-        const fullUrl = url + 'wx-base/jsapi-ticket/json-p-get-sign-package3?' +
+        const fullUrl = url + 'wx-base/jsapi-ticket/json-p-get-sign-package?' +
             '&url=' + encodeURIComponent(Base64.encode(location.href));
 
 

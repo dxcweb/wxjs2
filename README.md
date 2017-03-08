@@ -1,9 +1,9 @@
-# wxjs
+# wxjs2
 react版本的微信js基础服务
 ## install
 
 ```
-npm install wxjs --save
+npm install wxjs2 --save
 ```
 ## Development
 
@@ -12,11 +12,11 @@ npm install
 npm start
 ```
 ## Example
-[http://github.dxcweb.com/wxjs/](http://github.dxcweb.com/wxjs/ "http://github.dxcweb.com/wxjs/")
+[http://github.dxcweb.com/wxjs2/](http://github.dxcweb.com/wxjs/ "http://github.dxcweb.com/wxjs/")
 
 ## Usage
 ### WopLogin and WopSign
-    import  {WopLogin,WopSign} from 'wxjs';
+    import  {WopLogin,WopSign} from 'wxjs2';
 	...
 	<WopLogin 
 		url="http://wop.dxcweb.com/service/"
