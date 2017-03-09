@@ -3,18 +3,15 @@
  */
 import React, {Component, PropTypes} from 'react';
 import ReactDOM from 'react-dom';
-import  {WxSign, WxUploadImgToOss} from 'wxjs2';
+import  {WxQySign, WxQyUploadImgToOss} from 'wxjs2';
 import Clipboard from 'clipboard'
 import {WxFlowLayoutImagePicker} from 'react-imagepicker';
-import Loading from './Loading';
-class WxUploadImgToOssExamples extends Component {
+import {Loading} from 'fs-loading'
+export default class WxQyUploadImgToOssExamples extends Component {
     state = {
         loading: false,
-        serverIds: []
+        serverIds: []//serverIds例子中用于复制调试使用实际项目中不需要
     };
-
-    wx_url = "http://21.net.fangstar.net/wx-base/";
-    app_key = "abc123";
 
     componentDidMount() {
         //复制调试
@@ -22,10 +19,7 @@ class WxUploadImgToOssExamples extends Component {
     }
 
     getImageUrl(value) {
-        if (value.localId != null) {
-            return value.localId;
-        }
-        return value.url;
+        return value;
     }
 
     uploadImage(serverId, localId, callback) {
@@ -33,13 +27,12 @@ class WxUploadImgToOssExamples extends Component {
         const {serverIds}=this.state;
         serverIds.push(serverId);
         this.setState({serverIds});
-        //serverId = 'mVB_3IMUO7s-IzAHD3LashhhtZEKphw8tREurulCM5WQSMzvCXck0CmbEnBdH5l_';
-        WxUploadImgToOss(me.wx_url, me.app_key, serverId).then(function (res) {
+        //serverId = 'C95JdQ-M2V3wrL5B4nOl54cXUmuqDHII4YhstUgWm-5r0G4ospJnSaalymShZric';
+        WxQyUploadImgToOss(wxqy_url, serverId).then(function (res) {
             if (res.result) {
-                res.data.localId = localId;
-                callback(res.data);
+                callback(res.data.host + res.data.url);
             } else {
-                alert(res.msg);
+                alert(res);
                 callback(false);
             }
         }).catch(function (ex) {
@@ -60,22 +53,22 @@ class WxUploadImgToOssExamples extends Component {
         const me = this;
         const {serverIds}=me.state;
         return (
-            <WxSign url={this.wx_url} app_key={this.app_key}>
-                <div style={{maxWidth: 400,margin:20}}>
-                    <Loading loading={this.state.loading}/>
-                    <WxFlowLayoutImagePicker
-                        max={11}
-                        getImageUrl={this.getImageUrl.bind(this)}
-                        uploadImage={this.uploadImage.bind(this)}
-                        onLoading={this.onLoading.bind(this)}
-                    />
+            <div style={{maxWidth: 400,margin:20}}>
+                <Loading isShow={this.state.loading}/>
+                <WxFlowLayoutImagePicker
+                    max={11}
+                    getImageUrl={this.getImageUrl.bind(this)}
+                    uploadImage={this.uploadImage.bind(this)}
+                    onLoading={this.onLoading.bind(this)}
+                />
+                <div>
+                    <p>serverIds</p>
                     <div>
-                        <p>serverIds</p>
                         <input id="foo" onChange={()=>{}} value={serverIds.join(',')}/>
-                        <button className="btn" data-clipboard-target="#foo">复制serverIds</button>
                     </div>
+                    <button className="btn" data-clipboard-target="#foo">复制serverIds</button>
                 </div>
-            </WxSign>
+            </div>
         )
     }
 }

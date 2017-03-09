@@ -3,7 +3,7 @@ import Q from 'q'
 
 const uploadImgToOss = (url, media_id)=> {
     const callback = 'WxQyUploadImgToOss' + Math.floor(Math.random() * 10000);
-    const fullUrl = url + 'wx-base/media/json-p-upload-img2?' +
+    const fullUrl = url + 'wx-base/media/json-p-upload-img?' +
         'media_id=' + media_id +
         '&callback=' + callback;
     const promise = Q.defer();
