@@ -8,7 +8,7 @@ class WopSignExamples extends Component {
     render() {
         return (
             <WxQySign
-                url="http://21.net.fangstar.net/wxqy-zyb/"
+                url="http://zsy.tuobacco.com/wxqy/tbk/"
                 debug={true}
                 ready={(wx)=>{
                     // wx.xxx
