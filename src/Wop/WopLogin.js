@@ -4,10 +4,14 @@
 import React, {Component, PropTypes} from 'react';
 import Base64 from '../utils/Base64'
 import JsonP from '../utils/JsonP'
+import url from '../utils/url'
+
 import Q from 'q'
 
 export default class WxQyLogin extends Component {
     static defaultProps = {
+        error: 'false',
+        cookie_name: 'wop2',
         is_get_user_info: false,
         userInfoCB: (user)=> {
         }
@@ -20,18 +24,23 @@ export default class WxQyLogin extends Component {
     };
     //渲染前调用一次，这个时候DOM结构还没有渲染。fv
     componentWillMount() {
-        const {url, wx_app_id, userInfo}=this.props;
+        const {url, wx_app_id, userInfo,cookie_name}=this.props;
         if (url == null || wx_app_id == null) {
             return false;
         }
         if (!this.state.isLogin) {
             this.jsonp().then((response)=> {
                 const json = JSON.parse(response);
+                if (!json.ok) {
+                    this.setState({error: true, msg: json.msg});
+                    return false;
+                }
                 if (json.url) {
+                    this.setCookie(cookie_name, json.cookie, 7);
                     this.login(json.url);
                 } else {
                     this.setState({isLogin: true});
-                    userInfo.call(this,json);
+                    userInfo.call(this, json);
                 }
             })
         }
@@ -52,12 +61,28 @@ export default class WxQyLogin extends Component {
         }, 5000);
     }
 
+    setCookie(c_name, value, expiredays) {
+        var exdate = new Date();
+        exdate.setDate(exdate.getDate() + expiredays);
+        document.cookie = c_name + "=" + encodeURIComponent(value) +
+            ((expiredays == null) ? "" : ";expires=" + exdate.toGMTString()) + ";path=/" + ";domain=" + url('domain');
+    }
+
+    getCookie(name) {
+        var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
+        if (arr = document.cookie.match(reg))
+            return arr[2];
+        else
+            return '';
+    }
+
     jsonp() {
-        const {url, is_get_user_info, wx_app_id}=this.props;
-        const fullUrl = url + 'app/base/login?' +
+        const {url, is_get_user_info, wx_app_id,cookie_name}=this.props;
+        const fullUrl = url + 'wx-base/login?' +
             'wx_app_id=' + wx_app_id +
             '&is_user_info=' + is_get_user_info +
-            '&url=' + encodeURIComponent(Base64.encode(location.href));
+            '&url=' + encodeURIComponent(Base64.encode(location.href)) +
+            '&cookie=' + this.getCookie(cookie_name);
         const promise = Q.defer();
         const timed = setTimeout(function () {
             alert('登录超时！');
@@ -68,12 +93,17 @@ export default class WxQyLogin extends Component {
             window.WopUserInfo = null;
             promise.resolve(res);
         };
-        return promise.promise;;
+        return promise.promise;
     }
 
     render() {
 
-        const {isLogin, manualLoginUrl, manualLogin}=this.state;
+        const {isLogin, manualLoginUrl, manualLogin,error,msg}=this.state;
+        if (error) {
+            return <div style={{textAlign:'center',margin:'1rem 0.3rem',fontSize:'0.32rem'}}>
+                {msg}
+            </div>;
+        }
         if (manualLogin) {
             return (
                 <div style={{textAlign:'center',marginTop:'50px'}}>

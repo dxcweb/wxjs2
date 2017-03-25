@@ -5,6 +5,7 @@ import React, {Component, PropTypes} from 'react';
 import Base64 from '../utils/Base64'
 import Q from 'q'
 import JsonP from '../utils/JsonP'
+const openUrl = location.origin + location.pathname + location.search;
 
 export default class WopSign extends Component {
     state = {
@@ -46,9 +47,9 @@ export default class WopSign extends Component {
 
     jsonp() {
         const {url, wx_app_id}=this.props;
-        const fullUrl = url + 'app/base/sign?' +
+        const fullUrl = url + 'wx-base/sign?' +
             'wx_app_id=' + wx_app_id +
-            '&url=' + encodeURIComponent(Base64.encode(location.href));
+            '&url=' + encodeURIComponent(Base64.encode(openUrl));
         const promise = Q.defer();
         JsonP(fullUrl, 'WopSign' + Math.floor(Math.random() * 10000));
         const timed = setTimeout(function () {
