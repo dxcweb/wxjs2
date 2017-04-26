@@ -37,3 +37,4 @@ npm start
 	WopUploadImgToOss(me.wop_url, me.wx_app_id, serverId).then(function (img) {
 	    
 	});
+WopUploadImgToOss.js(未更新)

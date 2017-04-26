@@ -2,12 +2,10 @@
  * Created by dxc on 2016/10/28.
  */
 import React, {Component, PropTypes} from 'react';
-import Base64 from '../utils/Base64'
-import JsonP from '../utils/JsonP'
-import url from '../utils/url'
-
+import Base64 from 'wxjs2/lib/utils/Base64'
+import JsonP from 'wxjs2/lib/utils/JsonP'
 import Q from 'q'
-
+import Url from 'urijs'
 export default class WxQyLogin extends Component {
     static defaultProps = {
         error: 'false',
@@ -24,8 +22,8 @@ export default class WxQyLogin extends Component {
     };
     //渲染前调用一次，这个时候DOM结构还没有渲染。fv
     componentWillMount() {
-        const {url, wx_app_id, userInfo,cookie_name}=this.props;
-        if (url == null || wx_app_id == null) {
+        const {url, app_id, userInfo,cookie_name}=this.props;
+        if (url == null || app_id == null) {
             return false;
         }
         if (!this.state.isLogin) {
@@ -62,10 +60,15 @@ export default class WxQyLogin extends Component {
     }
 
     setCookie(c_name, value, expiredays) {
+        var uri = new Url();
+        var domain = uri.domain();
         var exdate = new Date();
+        if (domain == null || domain == '') {
+            domain = location.hostname;
+        }
         exdate.setDate(exdate.getDate() + expiredays);
         document.cookie = c_name + "=" + encodeURIComponent(value) +
-            ((expiredays == null) ? "" : ";expires=" + exdate.toGMTString()) + ";path=/" + ";domain=" + url('domain');
+            ((expiredays == null) ? "" : ";expires=" + exdate.toGMTString()) + ";path=/" + ";domain=" + domain;
     }
 
     getCookie(name) {
@@ -77,9 +80,9 @@ export default class WxQyLogin extends Component {
     }
 
     jsonp() {
-        const {url, is_get_user_info, wx_app_id,cookie_name}=this.props;
+        const {url, is_get_user_info, app_id,cookie_name}=this.props;
         const fullUrl = url + 'wx-base/login?' +
-            'wx_app_id=' + wx_app_id +
+            'app_id=' + app_id +
             '&is_user_info=' + is_get_user_info +
             '&url=' + encodeURIComponent(Base64.encode(location.href)) +
             '&cookie=' + this.getCookie(cookie_name);
@@ -111,9 +114,9 @@ export default class WxQyLogin extends Component {
                 </div>
             )
         }
-        const {wx_app_id, url}=this.props;
-        if (wx_app_id == null) {
-            return <div>请设置wx_app_id</div>;
+        const {app_id, url}=this.props;
+        if (app_id == null) {
+            return <div>请设置app_id</div>;
         }
         if (url == null) {
             return <div>请设置wop的url</div>;

@@ -1,6 +1,6 @@
 {
   "name": "wxjs2",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "react版本的微信js基础服务",
   "keywords": [
     "wxjs2"
@@ -33,7 +33,8 @@
     "react-imagepicker": "^0.0.8"
   },
   "dependencies": {
-    "q": "^1.4.1"
+    "q": "^1.4.1",
+    "urijs": "^1.18.10"
   },
   "files": [
     "examples",

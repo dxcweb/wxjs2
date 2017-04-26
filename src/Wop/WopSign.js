@@ -2,9 +2,9 @@
  * Created by dxc on 2016/10/28.
  */
 import React, {Component, PropTypes} from 'react';
-import Base64 from '../utils/Base64'
+import Base64 from 'wxjs2/lib/utils/Base64'
 import Q from 'q'
-import JsonP from '../utils/JsonP'
+import JsonP from 'wxjs2/lib/utils/JsonP'
 const openUrl = location.origin + location.pathname + location.search;
 
 export default class WopSign extends Component {
@@ -46,9 +46,9 @@ export default class WopSign extends Component {
     }
 
     jsonp() {
-        const {url, wx_app_id}=this.props;
+        const {url, app_id}=this.props;
         const fullUrl = url + 'wx-base/sign?' +
-            'wx_app_id=' + wx_app_id +
+            'app_id=' + app_id +
             '&url=' + encodeURIComponent(Base64.encode(openUrl));
         const promise = Q.defer();
         JsonP(fullUrl, 'WopSign' + Math.floor(Math.random() * 10000));
@@ -66,9 +66,9 @@ export default class WopSign extends Component {
     render() {
 
         const {init}=this.state;
-        const {wx_app_id, url}=this.props;
-        if (wx_app_id == null) {
-            return <div>请设置wx_app_id</div>;
+        const {app_id, url}=this.props;
+        if (app_id == null) {
+            return <div>请设置app_id</div>;
         }
         if (url == null) {
             return <div>请设置wop的url</div>;
