@@ -4,6 +4,7 @@
 import Base64 from './utils/Base64'
 import WopLogin from './Wop/WopLogin'
 import WopSign from './Wop/WopSign'
+import WopShare from './Wop/WopShare'
 import WopUploadImgToOss from './Wop/WopUploadImgToOss'
 import WxQyLogin from './WxQy/WxQyLogin'
 import WxQySign from './WxQy/WxQySign'
@@ -23,5 +24,6 @@ export default  {
     WxLogin,
     WxSign,
     WxUploadImgToOss,
-    Url
+    Url,
+    WopShare
 }

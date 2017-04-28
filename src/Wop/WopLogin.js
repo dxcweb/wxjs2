@@ -6,13 +6,16 @@ import Base64 from 'wxjs2/lib/utils/Base64'
 import JsonP from 'wxjs2/lib/utils/JsonP'
 import Q from 'q'
 import Url from 'urijs'
+import browser from '../utils/browser'
+
 export default class WxQyLogin extends Component {
     static defaultProps = {
         error: 'false',
         cookie_name: 'wop2',
         is_get_user_info: false,
-        userInfoCB: (user)=> {
-        }
+        userInfo: (user)=> {
+        },
+        onlyWechat: true
     };
     state = {
         isLogin: false,
@@ -22,25 +25,29 @@ export default class WxQyLogin extends Component {
     };
     //渲染前调用一次，这个时候DOM结构还没有渲染。fv
     componentWillMount() {
-        const {url, app_id, userInfo,cookie_name}=this.props;
+        const {url, app_id, userInfo,cookie_name,onlyWechat}=this.props;
         if (url == null || app_id == null) {
             return false;
         }
-        if (!this.state.isLogin) {
-            this.jsonp().then((response)=> {
-                const json = JSON.parse(response);
-                if (!json.ok) {
-                    this.setState({error: true, msg: json.msg});
-                    return false;
-                }
-                if (json.url) {
-                    this.setCookie(cookie_name, json.cookie, 7);
-                    this.login(json.url);
-                } else {
-                    this.setState({isLogin: true});
-                    userInfo.call(this, json);
-                }
-            })
+        if (browser['name'] == 'wechat') {
+            if (!this.state.isLogin) {
+                this.jsonp().then((response)=> {
+                    const json = JSON.parse(response);
+                    if (!json.ok) {
+                        this.setState({error: true, msg: json.msg});
+                        return false;
+                    }
+                    if (json.url) {
+                        this.setCookie(cookie_name, json.cookie, 7);
+                        this.login(json.url);
+                    } else {
+                        this.setState({isLogin: true});
+                        userInfo.call(this, json);
+                    }
+                })
+            }
+        } else if (onlyWechat) {
+            location.href = 'http://wx.fangstar.net/error-page/only-wechat.html';
         }
     }
 
@@ -100,8 +107,8 @@ export default class WxQyLogin extends Component {
     }
 
     render() {
-
         const {isLogin, manualLoginUrl, manualLogin,error,msg}=this.state;
+        const {onlyWechat}=this.props;
         if (error) {
             return <div style={{textAlign:'center',margin:'1rem 0.3rem',fontSize:'0.32rem'}}>
                 {msg}
@@ -120,6 +127,9 @@ export default class WxQyLogin extends Component {
         }
         if (url == null) {
             return <div>请设置wop的url</div>;
+        }
+        if (browser['name'] != 'wechat' && !onlyWechat) {
+            return this.props.children;
         }
         if (!isLogin) {
             return <div></div>

@@ -6,6 +6,13 @@ import Base64 from 'wxjs2/lib/utils/Base64'
 import Q from 'q'
 import JsonP from 'wxjs2/lib/utils/JsonP'
 const openUrl = location.origin + location.pathname + location.search;
+import browser from '../utils/browser'
+import requireJs from '../utils/requireJs'
+if (browser.name == 'wechat') {
+    requireJs('//res.wx.qq.com/open/js/jweixin-1.1.0.js')
+} else if (browser.name == 'qq') {
+    requireJs('//open.mobile.qq.com/sdk/qqapi.js?_bid=152')
+}
 
 export default class WopSign extends Component {
     state = {
@@ -21,20 +28,46 @@ export default class WopSign extends Component {
     //渲染前调用一次，这个时候DOM结构还没有渲染。fv
     componentWillMount() {
         const {debug, jsApiList, ready}=this.props;
-        const me = this;
-        this.jsonp().then((response)=> {
-            const data = JSON.parse(response);
-            data.debug = debug;
-            data.jsApiList = jsApiList;
-            me.wxConfig(data);
-            wx.ready(function () {
-                if (me.timeout) {
-                    clearTimeout(me.timeout);
+        if (browser['name'] == 'wechat') {
+            this.jsonp().then((response)=> {
+                const data = JSON.parse(response);
+                data.debug = debug;
+                data.jsApiList = jsApiList;
+                this.initWx(data);
+            })
+        } else if (browser['name'] == 'qq') {
+            this.initQQ();
+        }
+    }
+
+    initQQ() {
+        if (typeof mqq == 'object') {
+            const {ready}=this.props;
+            ready();
+            this.setState({init: true});
+        } else {
+            setTimeout(()=> {
+                this.initQQ();
+            }, 50)
+        }
+    }
+
+    initWx(data) {
+        if (typeof wx == 'object') {
+            const {ready}=this.props;
+            this.wxConfig(data);
+            wx.ready(()=> {
+                if (this.timeout) {
+                    clearTimeout(this.timeout);
                 }
-                ready(wx);
-                me.setState({init: true});
+                ready();
+                this.setState({init: true});
             });
-        })
+        } else {
+            setTimeout(()=> {
+                this.initWx(data);
+            }, 50)
+        }
     }
 
     wxConfig(data) {
@@ -72,6 +105,9 @@ export default class WopSign extends Component {
         }
         if (url == null) {
             return <div>请设置wop的url</div>;
+        }
+        if (browser['name'] != 'wechat' && browser['name'] != 'qq') {
+            return this.props.children;
         }
         if (!init) {
             return <div></div>
