@@ -2,13 +2,14 @@
  * Created by dxc on 2016/10/29.
  */
 import Base64 from './utils/Base64'
+import Cookie from './utils/Cookie'
 import WopLogin from './Wop/WopLogin'
 import WopSign from './Wop/WopSign'
 import WopShare from './Wop/WopShare'
 import WopUploadImgToOss from './Wop/WopUploadImgToOss'
-import WxQyLogin from './WxQy/WxQyLogin'
-import WxQySign from './WxQy/WxQySign'
-import WxQyUploadImgToOss from './WxQy/WxQyUploadImgToOss'
+import QyWxLogin from './QyWx/QyWxLogin'
+import QyWxSign from './QyWx/QyWxSign'
+import QyWxUploadImgToOss from './QyWx/QyWxUploadImgToOss'
 import WxLogin from './Wx/WxLogin'
 import WxSign from './Wx/WxSign'
 import WxUploadImgToOss from './Wx/WxUploadImgToOss'
@@ -25,5 +26,6 @@ export default  {
     WxSign,
     WxUploadImgToOss,
     Url,
-    WopShare
+    WopShare,
+    Cookie
 }

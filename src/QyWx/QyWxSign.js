@@ -6,8 +6,10 @@ import Base64 from '../utils/Base64'
 import Q from 'q'
 import JsonP from '../utils/JsonP'
 const openUrl = location.origin + location.pathname + location.search;
-
-export default class WxQySign extends Component {
+import browser from '../utils/browser'
+import requireJs from '../utils/requireJs'
+import Url from 'urijs'
+export default class QyWxSign extends Component {
     state = {
         init: false
     };
@@ -21,20 +23,31 @@ export default class WxQySign extends Component {
     //渲染前调用一次，这个时候DOM结构还没有渲染。fv
     componentWillMount() {
         const {debug, jsApiList, ready}=this.props;
-        const me = this;
-        this.jsonp().then((response)=> {
-            const data = JSON.parse(response);
-            data.debug = debug;
-            data.jsApiList = jsApiList;
-            me.wxConfig(data);
-            wx.ready(function () {
-                if (me.timeout) {
-                    clearTimeout(me.timeout);
+        if (browser['name'] == 'wechat') {
+            this.jsonp().then((response)=> {
+                const data = JSON.parse(response);
+                data.debug = debug;
+                data.jsApiList = jsApiList;
+                this.initWx(data);
+            })
+        }
+    }
+    initWx(data) {
+        if (typeof wx == 'object') {
+            const {ready}=this.props;
+            this.wxConfig(data);
+            wx.ready(()=> {
+                if (this.timeout) {
+                    clearTimeout(this.timeout);
                 }
-                ready(wx);
-                me.setState({init: true});
+                ready();
+                this.setState({init: true});
             });
-        })
+        } else {
+            setTimeout(()=> {
+                this.initWx(data);
+            }, 50)
+        }
     }
 
     wxConfig(data) {
@@ -46,34 +59,38 @@ export default class WxQySign extends Component {
     }
 
     jsonp() {
-        const {url}=this.props;
-        const fullUrl = url + 'wx-base/jsapi-ticket/json-p-get-sign-package?' +
+        const {url, app_id}=this.props;
+        const fullUrl = url + 'sign?' +
+            'app_id=' + app_id +
             '&url=' + encodeURIComponent(Base64.encode(openUrl));
-
-
         const promise = Q.defer();
-        JsonP(fullUrl, 'WxQySignPackage' + Math.floor(Math.random() * 10000));
+        JsonP(fullUrl, 'QyWxSignPackage' + Math.floor(Math.random() * 10000));
         const timed = setTimeout(function () {
             alert('签名超时！');
         }, 10000);
-        window.WxQySignPackage = function (res) {
+        window.QyWxSignPackage = function (res) {
             clearTimeout(timed);
-            window.WxQySignPackage = null;
+            window.QyWxSignPackage = null;
             promise.resolve(res);
         };
         return promise.promise;
     }
 
     render() {
-
         const {init}=this.state;
-        const {url, children}=this.props;
+        const {app_id, url}=this.props;
+        if (app_id == null) {
+            return <div>请设置app_id</div>;
+        }
         if (url == null) {
-            return <div>请设置wxqy的url</div>;
+            return <div>请设置wop的url</div>;
+        }
+        if (browser['name'] != 'wechat') {
+            return this.props.children;
         }
         if (!init) {
             return <div></div>
         }
-        return children;
+        return this.props.children;
     }
 }

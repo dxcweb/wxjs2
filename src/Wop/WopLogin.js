@@ -2,8 +2,8 @@
  * Created by dxc on 2016/10/28.
  */
 import React, {Component, PropTypes} from 'react';
-import Base64 from 'wxjs2/lib/utils/Base64'
-import JsonP from 'wxjs2/lib/utils/JsonP'
+import Base64 from '../utils/Base64'
+import JsonP from '../utils/JsonP'
 import Q from 'q'
 import Url from 'urijs'
 import browser from '../utils/browser'

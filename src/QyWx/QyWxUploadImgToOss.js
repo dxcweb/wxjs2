@@ -1,10 +1,11 @@
 import JsonP from '../utils/JsonP'
 import Q from 'q'
 
-const uploadImgToOss = (url, media_id)=> {
-    const callback = 'WxQyUploadImgToOss' + Math.floor(Math.random() * 10000);
-    const fullUrl = url + 'wx-base/media/json-p-upload-img?' +
-        'media_id=' + media_id +
+const uploadImgToOss = (url, app_id, media_id)=> {
+    const callback = 'QyWxUploadImgToOss' + Math.floor(Math.random() * 10000);
+    const fullUrl = url + 'upload-img' +
+        '?app_id=' + app_id +
+        '&media_id=' + media_id +
         '&callback=' + callback;
     const promise = Q.defer();
     JsonP(fullUrl, callback);

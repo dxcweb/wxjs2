@@ -2,9 +2,9 @@
  * Created by dxc on 2016/10/28.
  */
 import React, {Component, PropTypes} from 'react';
-import Base64 from 'wxjs2/lib/utils/Base64'
+import Base64 from '../utils/Base64'
 import Q from 'q'
-import JsonP from 'wxjs2/lib/utils/JsonP'
+import JsonP from '../utils/JsonP'
 const openUrl = location.origin + location.pathname + location.search;
 import browser from '../utils/browser'
 import requireJs from '../utils/requireJs'
