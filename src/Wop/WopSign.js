@@ -8,6 +8,8 @@ import JsonP from 'wxjs2/lib/utils/JsonP'
 const openUrl = location.origin + location.pathname + location.search;
 import browser from '../utils/browser'
 import requireJs from '../utils/requireJs'
+import Url from 'urijs'
+
 if (browser.name == 'wechat') {
     requireJs('//res.wx.qq.com/open/js/jweixin-1.1.0.js')
 } else if (browser.name == 'qq') {
@@ -36,7 +38,11 @@ export default class WopSign extends Component {
                 this.initWx(data);
             })
         } else if (browser['name'] == 'qq') {
-            this.initQQ();
+            if (location.search.indexOf('isappinstalled') < 0) {
+                location.href=Url().addQuery('isappinstalled', 0).toString();
+            } else {
+                this.initQQ();
+            }
         }
     }
 
@@ -97,7 +103,6 @@ export default class WopSign extends Component {
     }
 
     render() {
-
         const {init}=this.state;
         const {app_id, url}=this.props;
         if (app_id == null) {
