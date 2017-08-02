@@ -13,6 +13,8 @@ import QyWxUploadImgToOss from './QyWx/QyWxUploadImgToOss'
 import WxLogin from './Wx/WxLogin'
 import WxSign from './Wx/WxSign'
 import WxUploadImgToOss from './Wx/WxUploadImgToOss'
+import QyWxImagePicker from './QyWx/QyWxImagePicker'
+import WopImagePicker from './Wop/WopImagePicker'
 import Url from 'urijs'
 export default  {
     Base64,
@@ -27,5 +29,7 @@ export default  {
     WxUploadImgToOss,
     Url,
     WopShare,
-    Cookie
+    Cookie,
+    QyWxImagePicker,
+    WopImagePicker
 }
