@@ -28203,7 +28203,7 @@
 /* 204 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -28255,10 +28255,10 @@
 	var openUrl = location.origin + location.pathname + location.search;
 	
 	
-	if (_browser2.default.name == 'wechat') {
-	  (0, _requireJs2.default)('//res.wx.qq.com/open/js/jweixin-1.4.0.js');
-	} else if (_browser2.default.name == 'qq') {
-	  (0, _requireJs2.default)('//open.mobile.qq.com/sdk/qqapi.js?_bid=152');
+	if (_browser2.default.name == "wechat") {
+	  (0, _requireJs2.default)("//res.wx.qq.com/open/js/jweixin-1.4.0.js");
+	} else if (_browser2.default.name == "qq") {
+	  (0, _requireJs2.default)("//open.mobile.qq.com/sdk/qqapi.js?_bid=152");
 	}
 	
 	var WopSign = function (_Component) {
@@ -28287,16 +28287,16 @@
 	        jsApiList = _props.jsApiList,
 	        ready = _props.ready;
 	
-	    if (_browser2.default['name'] == 'wechat') {
+	    if (_browser2.default["name"] == "wechat") {
 	      this.jsonp().then(function (response) {
 	        var data = JSON.parse(response);
 	        data.debug = debug;
 	        data.jsApiList = jsApiList;
 	        _this2.initWx(data);
 	      });
-	    } else if (_browser2.default['name'] == 'qq') {
-	      if (location.search.indexOf('isappinstalled') < 0) {
-	        location.href = (0, _urijs2.default)().addQuery('isappinstalled', 0).toString();
+	    } else if (_browser2.default["name"] == "qq") {
+	      if (location.search.indexOf("isappinstalled") < 0) {
+	        location.href = (0, _urijs2.default)().addQuery("isappinstalled", 0).toString();
 	      } else {
 	        this.initQQ();
 	      }
@@ -28306,7 +28306,7 @@
 	  WopSign.prototype.initQQ = function initQQ() {
 	    var _this3 = this;
 	
-	    if ((typeof mqq === 'undefined' ? 'undefined' : _typeof(mqq)) == 'object') {
+	    if ((typeof mqq === "undefined" ? "undefined" : _typeof(mqq)) == "object") {
 	      var ready = this.props.ready;
 	
 	      ready();
@@ -28321,7 +28321,7 @@
 	  WopSign.prototype.initWx = function initWx(data) {
 	    var _this4 = this;
 	
-	    if ((typeof wx === 'undefined' ? 'undefined' : _typeof(wx)) == 'object') {
+	    if ((typeof wx === "undefined" ? "undefined" : _typeof(wx)) == "object") {
 	      var ready = this.props.ready;
 	
 	      this.wxConfig(data);
@@ -28352,11 +28352,11 @@
 	        url = _props2.url,
 	        app_id = _props2.app_id;
 	
-	    var fullUrl = url + 'wx-base/sign?' + 'app_id=' + app_id + '&url=' + encodeURIComponent(_Base2.default.encode(openUrl));
+	    var fullUrl = url + "wx-base/sign?" + "app_id=" + app_id + "&url=" + encodeURIComponent(_Base2.default.encode(openUrl));
 	    var promise = _q2.default.defer();
-	    (0, _JsonP2.default)(fullUrl, 'WopSign' + Math.floor(Math.random() * 10000));
+	    (0, _JsonP2.default)(fullUrl, "WopSign" + Math.floor(Math.random() * 10000));
 	    var timed = setTimeout(function () {
-	      alert('签名超时！');
+	      alert("签名超时！");
 	    }, 10000);
 	    window.WopSign = function (res) {
 	      clearTimeout(timed);
@@ -28374,23 +28374,23 @@
 	
 	    if (app_id == null) {
 	      return _react2.default.createElement(
-	        'div',
+	        "div",
 	        null,
-	        '\u8BF7\u8BBE\u7F6Eapp_id'
+	        "\u8BF7\u8BBE\u7F6Eapp_id"
 	      );
 	    }
 	    if (url == null) {
 	      return _react2.default.createElement(
-	        'div',
+	        "div",
 	        null,
-	        '\u8BF7\u8BBE\u7F6Ewop\u7684url'
+	        "\u8BF7\u8BBE\u7F6Ewop\u7684url"
 	      );
 	    }
-	    if (_browser2.default['name'] != 'wechat' && _browser2.default['name'] != 'qq') {
+	    if (_browser2.default["name"] != "wechat" && _browser2.default["name"] != "qq") {
 	      return this.props.children;
 	    }
 	    if (!init) {
-	      return _react2.default.createElement('div', null);
+	      return _react2.default.createElement("div", null);
 	    }
 	    return this.props.children;
 	  };
@@ -28401,7 +28401,7 @@
 	WopSign.defaultProps = {
 	  debug: false,
 	  ready: function ready(wx) {},
-	  jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage', 'onMenuShareQQ', 'onMenuShareWeibo', 'onMenuShareQZone', 'startRecord', 'stopRecord', 'onVoiceRecordEnd', 'playVoice', 'pauseVoice', 'stopVoice', 'onVoicePlayEnd', 'uploadVoice', 'downloadVoice', 'chooseImage', 'previewImage', 'uploadImage', 'downloadImage', 'translateVoice', 'getNetworkType', 'openLocation', 'getLocation', 'hideOptionMenu', 'showOptionMenu', 'hideMenuItems', 'showMenuItems', 'hideAllNonBaseMenuItem', 'showAllNonBaseMenuItem', 'closeWindow', 'scanQRCode', 'chooseWXPay', 'openProductSpecificView', 'addCard', 'chooseCard', 'openCard', 'getLocalImgData']
+	  jsApiList: ["updateTimelineShareData", "updateAppMessageShareData", "onMenuShareTimeline", "onMenuShareAppMessage", "onMenuShareQQ", "onMenuShareWeibo", "onMenuShareQZone", "startRecord", "stopRecord", "onVoiceRecordEnd", "playVoice", "pauseVoice", "stopVoice", "onVoicePlayEnd", "uploadVoice", "downloadVoice", "chooseImage", "previewImage", "uploadImage", "downloadImage", "translateVoice", "getNetworkType", "openLocation", "getLocation", "hideOptionMenu", "showOptionMenu", "hideMenuItems", "showMenuItems", "hideAllNonBaseMenuItem", "showAllNonBaseMenuItem", "closeWindow", "scanQRCode", "chooseWXPay", "openProductSpecificView", "addCard", "chooseCard", "openCard", "getLocalImgData"]
 	};
 	exports.default = WopSign;
 	module.exports = exports['default'];
