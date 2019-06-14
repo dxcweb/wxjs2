@@ -1,6 +1,6 @@
 {
   "name": "wxjs2",
-  "version": "0.1.18",
+  "version": "0.1.19",
   "description": "react版本的微信js基础服务",
   "keywords": [
     "wxjs2"
@@ -25,12 +25,12 @@
   "devDependencies": {
     "babel-core": "^6.18.0",
     "clipboard": "^1.5.15",
-    "fs-loading": "^0.0.11",
+    "fs-loading": "^0.2.8",
     "lodash": "^4.16.4",
     "rc-tools": "5.x",
     "react": "^15.2.1",
     "react-dom": "^15.2.1",
-    "react-imagepicker": "^0.0.8"
+    "react-imagepicker": "^0.0.11"
   },
   "dependencies": {
     "q": "^1.4.1",

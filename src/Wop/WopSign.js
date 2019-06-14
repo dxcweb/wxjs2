@@ -11,7 +11,7 @@ import requireJs from '../utils/requireJs';
 import Url from 'urijs';
 
 if (browser.name == 'wechat') {
-  requireJs('//res.wx.qq.com/open/js/jweixin-1.2.0.js');
+  requireJs('//res.wx.qq.com/open/js/jweixin-1.4.0.js');
 } else if (browser.name == 'qq') {
   requireJs('//open.mobile.qq.com/sdk/qqapi.js?_bid=152');
 }
