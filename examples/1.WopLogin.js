@@ -15,11 +15,11 @@ webpackJsonp([0],[
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reactDom = __webpack_require__(38);
+	var _reactDom = __webpack_require__(41);
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _wxjs = __webpack_require__(185);
+	var _wxjs = __webpack_require__(188);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	

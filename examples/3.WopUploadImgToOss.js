@@ -3,12 +3,12 @@ webpackJsonp([2],{
 /***/ 0:
 /***/ (function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(282);
+	module.exports = __webpack_require__(253);
 
 
 /***/ }),
 
-/***/ 282:
+/***/ 253:
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -17,19 +17,19 @@ webpackJsonp([2],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reactDom = __webpack_require__(38);
+	var _reactDom = __webpack_require__(41);
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _wxjs = __webpack_require__(185);
+	var _wxjs = __webpack_require__(188);
 	
-	var _clipboard = __webpack_require__(283);
+	var _clipboard = __webpack_require__(254);
 	
 	var _clipboard2 = _interopRequireDefault(_clipboard);
 	
-	var _reactImagepicker = __webpack_require__(212);
+	var _reactImagepicker = __webpack_require__(215);
 	
-	var _Loading = __webpack_require__(291);
+	var _Loading = __webpack_require__(262);
 	
 	var _Loading2 = _interopRequireDefault(_Loading);
 	
@@ -147,12 +147,12 @@ webpackJsonp([2],{
 
 /***/ }),
 
-/***/ 283:
+/***/ 254:
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (global, factory) {
 	    if (true) {
-	        !(__WEBPACK_AMD_DEFINE_ARRAY__ = [module, __webpack_require__(284), __webpack_require__(286), __webpack_require__(287)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	        !(__WEBPACK_AMD_DEFINE_ARRAY__ = [module, __webpack_require__(255), __webpack_require__(257), __webpack_require__(258)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 	    } else if (typeof exports !== "undefined") {
 	        factory(module, require('./clipboard-action'), require('tiny-emitter'), require('good-listener'));
 	    } else {
@@ -360,12 +360,12 @@ webpackJsonp([2],{
 
 /***/ }),
 
-/***/ 284:
+/***/ 255:
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (global, factory) {
 	    if (true) {
-	        !(__WEBPACK_AMD_DEFINE_ARRAY__ = [module, __webpack_require__(285)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	        !(__WEBPACK_AMD_DEFINE_ARRAY__ = [module, __webpack_require__(256)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 	    } else if (typeof exports !== "undefined") {
 	        factory(module, require('select'));
 	    } else {
@@ -595,7 +595,7 @@ webpackJsonp([2],{
 
 /***/ }),
 
-/***/ 285:
+/***/ 256:
 /***/ (function(module, exports) {
 
 	function select(element) {
@@ -645,7 +645,7 @@ webpackJsonp([2],{
 
 /***/ }),
 
-/***/ 286:
+/***/ 257:
 /***/ (function(module, exports) {
 
 	function E () {
@@ -714,15 +714,16 @@ webpackJsonp([2],{
 	};
 	
 	module.exports = E;
+	module.exports.TinyEmitter = E;
 
 
 /***/ }),
 
-/***/ 287:
+/***/ 258:
 /***/ (function(module, exports, __webpack_require__) {
 
-	var is = __webpack_require__(288);
-	var delegate = __webpack_require__(289);
+	var is = __webpack_require__(259);
+	var delegate = __webpack_require__(260);
 	
 	/**
 	 * Validates all params and calls the right
@@ -820,7 +821,7 @@ webpackJsonp([2],{
 
 /***/ }),
 
-/***/ 288:
+/***/ 259:
 /***/ (function(module, exports) {
 
 	/**
@@ -876,10 +877,10 @@ webpackJsonp([2],{
 
 /***/ }),
 
-/***/ 289:
+/***/ 260:
 /***/ (function(module, exports, __webpack_require__) {
 
-	var closest = __webpack_require__(290);
+	var closest = __webpack_require__(261);
 	
 	/**
 	 * Delegates event to a selector.
@@ -961,7 +962,7 @@ webpackJsonp([2],{
 
 /***/ }),
 
-/***/ 290:
+/***/ 261:
 /***/ (function(module, exports) {
 
 	var DOCUMENT_NODE_TYPE = 9;
@@ -1001,7 +1002,7 @@ webpackJsonp([2],{
 
 /***/ }),
 
-/***/ 291:
+/***/ 262:
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1014,7 +1015,7 @@ webpackJsonp([2],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reactSpeed = __webpack_require__(219);
+	var _reactSpeed = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"react-speed\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
