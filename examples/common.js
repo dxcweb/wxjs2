@@ -28283,14 +28283,13 @@
 	    var _this2 = this;
 	
 	    var _props = this.props,
-	        debug = _props.debug,
 	        jsApiList = _props.jsApiList,
 	        ready = _props.ready;
 	
 	    if (_browser2.default["name"] == "wechat") {
 	      this.jsonp().then(function (response) {
 	        var data = JSON.parse(response);
-	        data.debug = debug;
+	        data.debug = !!window.wx_debug;
 	        data.jsApiList = jsApiList;
 	        _this2.initWx(data);
 	      });
@@ -28399,7 +28398,6 @@
 	}(_react.Component);
 	
 	WopSign.defaultProps = {
-	  debug: false,
 	  ready: function ready(wx) {},
 	  jsApiList: ["updateTimelineShareData", "updateAppMessageShareData", "onMenuShareTimeline", "onMenuShareAppMessage", "onMenuShareQQ", "onMenuShareWeibo", "onMenuShareQZone", "startRecord", "stopRecord", "onVoiceRecordEnd", "playVoice", "pauseVoice", "stopVoice", "onVoicePlayEnd", "uploadVoice", "downloadVoice", "chooseImage", "previewImage", "uploadImage", "downloadImage", "translateVoice", "getNetworkType", "openLocation", "getLocation", "hideOptionMenu", "showOptionMenu", "hideMenuItems", "showMenuItems", "hideAllNonBaseMenuItem", "showAllNonBaseMenuItem", "closeWindow", "scanQRCode", "chooseWXPay", "openProductSpecificView", "addCard", "chooseCard", "openCard", "getLocalImgData"]
 	};
